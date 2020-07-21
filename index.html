@@ -13078,7 +13078,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Interpreting-the-effects-of-COVID-19-on-the-University-of-Maryland-Fall-Semester">Interpreting the effects of COVID-19 on the University of Maryland Fall Semester<a class="anchor-link" href="#Interpreting-the-effects-of-COVID-19-on-the-University-of-Maryland-Fall-Semester">&#182;</a></h1><p><strong>by Allen Tu, Joshua Blume, Zach Mazer</strong> – July 21, 2020<br>
-<a href="https://www.kaggle.com/fireballbyedimyrnmom/us-counties-covid-19-dataset">Data</a> by the New York Times</p>
+<a href="https://github.com/nytimes/covid-19-dat">Data</a> by the New York Times</p>
 
 </div>
 </div>
@@ -13086,7 +13086,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>On March 18, 2020, The University of Maryland began operating online due to the coronavirus pandemic. Since then, the country has experienced numerous overlapping responses from federal, state and local governments in an effort to prevent and contain the spread of COVID-19. The state of Maryland, which has spent several months under evolving lockdown orders, is now allowing limited on-campus courses at universities for the Fall semester. This leaves many students considering whether or not it's safe to be on campus and if they should live in residence halls and nearby apartments.</p><p>This tutorial uses the following imports to scrape, process, and analyze data.</p>
+<p>On March 18, 2020, The University of Maryland began operating online due to the coronavirus pandemic. Since then, the country has experienced numerous overlapping responses from federal, state and local governments in an effort to prevent and contain the spread of COVID-19. The state of Maryland, which has spent several months under evolving lockdown orders, is now allowing limited on-campus courses at universities for the Fall semester. This leaves many students considering whether it is safe to be on campus and if they should live in residence halls and nearby apartments.</p><p>This tutorial uses the following imports to scrape, process, and analyze data.</p>
 
 </div>
 </div>
@@ -13105,6 +13105,7 @@ div#notebook {
 <span class="c1"># Suppress SettingWithoutCopy warning.</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">os</span>
 </pre></div>
 
     </div>
@@ -13116,7 +13117,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Case-Data-on-Coronavirus">Case Data on Coronavirus<a class="anchor-link" href="#Case-Data-on-Coronavirus">&#182;</a></h2><p>Considering the uncertainty of this period, we want to demonstrate the trends of coronavirus in the country and what we could expect in Maryland during the Fall semester with the information currently available to us. We'll primarily be using the coronavirus data compiled by the New York Times, then processing it to demonstrate various facts about the state of the pandemic.</p>
-<p>The first thing we'll do is read in the data from the <a href="https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv">'us-counties.csv'</a> file in the <a href="https://github.com/nytimes/covid-19-data">New York Times COVID-19 GitHub</a>. This DataFrame tracks the number of COVID-19 cases and deaths across US counties for each day since January 21, 2020.</p>
+<p>The first thing we'll do is read in the data from the <a href="https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv">'us-counties.csv'</a> file in the <a href="https://github.com/nytimes/covid-19-data">New York Times COVID-19 GitHub</a>. This dataset tracks the number of COVID-19 cases and deaths across US counties for each day since January 21, 2020.</p>
 </div>
 </div>
 </div>
@@ -13450,7 +13451,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The resulting dataframe contains all of the coronavirus data used in this tutorial.</p>
+<p>The resulting dataframe contains all the coronavirus data used in this tutorial.</p>
 
 </div>
 </div>
@@ -13532,8 +13533,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The spread of the coronavirus was initially slow. After January 28, the number of cases skyrocketed and new cases have been identified every day. The trend becomes roughly linear for the months of April, May, and June, when approximately 25,000 to 30,000 new cases were reported each day.</p>
-<p>Efforts, such as the closing of public areas and the encouragement of social distancing, to slow the spread of the disease probably prevented hundreds of thousands of additional cases during the first months of the pandemic. However, despite the rapidly growing numbers, many states attempted to reopen. The gradual exponential curve that began around the end of June is most likely a result of these decisions and, now, approximately 60,000 to 70,000 new cases are reported each day -- more than double the amount in prior months. The current total is almost 3.8 million and cases are still climbing steeply.</p>
+<p>The spread of the coronavirus was initially slow. After January 28, the number of cases skyrocketed, and new cases have been identified every day. The trend becomes roughly linear for the months of April, May, and June, when approximately 25,000 to 30,000 new cases were reported each day.</p>
+<p>Efforts, such as the closing of public areas and the encouragement of social distancing, to slow the spread of the disease probably prevented hundreds of thousands of additional cases during the first months of the pandemic. However, despite the rapidly growing numbers, many states attempted to reopen. The gradual exponential curve that began around the end of June is most likely a result of these decisions and, now, approximately 60,000 to 70,000 new cases are reported each day -- more than double the amount in prior months. The current total is around 3.85 million and cases are still climbing steeply.</p>
 
 </div>
 </div>
@@ -13666,7 +13667,7 @@ Death Rate: 0.03660030492451532
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>One variable that could have an effect on the number of cases in a county is population. California, Texas, and Florida are the most populus states in the United States and they are the three states with the most COVID-19 cases. We will create a linear regression model of the relationship between the total case count of a state with its population.</p>
+<p>One variable that could influence the number of cases in a county is population. California, Texas, and Florida are the most populous states in the United States and they are also the three states with the most COVID-19 cases. We will create a linear regression model of the relationship between the total case count of a state with its population.</p>
 <p>Exploring the relationship between cases and state population means that we need the total case count for each state. The entries in the COVID-19 dataset are by county, so we group the COVID-19 dataframe by state, calculate the sum of the cases of each group, and then create a dataframe with the totals.</p>
 <p>The result is a dataframe with each state and its corresponding total case count.</p>
 
@@ -14251,8 +14252,8 @@ Death Rate: 0.03660030492451532
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We graph the total cases across total population for each U.S. state in a scatterplot to visualize the relationship between case count and population. The distribution appears to be roughly linear, so we also fit linear regression line using scikit learn and overlay it on the plot.</p>
-<p>Scikit learn is also used to calculate the $p$-value of the distribution and $r^2$ score of the model. The null hypothesis of the significance test is that there is no statistically significant relationship between the total number of COVID-19 cases in a state and its population.</p>
+<p>We graph the total cases across total population for each U.S. state in a scatterplot to visualize the relationship between case count and population. The distribution appears to be roughly linear, so we also fit linear regression line using scikit-learn and overlay it on the plot.</p>
+<p>Scikit-learn is also used to calculate the $p$-value of the distribution and $r^2$ score of the model. The null hypothesis of the significance test is that there is no statistically significant relationship between the total number of COVID-19 cases in a state and its population.</p>
 
 </div>
 </div>
@@ -14328,7 +14329,7 @@ p-value: 8.852761150461485e-08
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The $p$-value is 8.85e-08, which is less than the accepted threshold of 0.05. Therefore, we reject the null hypothesis: there is a highly statistically significant relationship between the total number of COVID-19 cases in a state and its population.</p>
-<p>However, the $r^2$ score is a somewhat low 0.452, indicating that linear regression model is not a good representation of the true relationship between cases and population. Possible explanations for the low goodness of fit are that there are not enough data points and that the measures vary too widely for each state.</p>
+<p>However, the $r^2$ score is a low 0.452, indicating that linear regression model is not a good representation of the true relationship between cases and population. Possible explanations for the low goodness of fit are that there are not enough data points and that the measures vary too widely for each state.</p>
 
 </div>
 </div>
@@ -14379,7 +14380,7 @@ p-value: 8.852761150461485e-08
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Measuring cases and population across counties attempts to address both of these problems. Similar to the states bar chart, the three counties with the most COVID-19 cases are also where the three most populus cities (New York, Los Angeles, and Chicago, respectively) in the United States are located.</p>
+<p>Measuring cases and population across counties attempts to address both of these problems. Similar to the states bar chart, the three counties with the most COVID-19 cases are also where the three most populous cities (New York, Los Angeles, and Chicago, respectively) in the United States are located.</p>
 <p>The population of each county is needed to create another linear regression model. <a href="https://www.census.gov/data/datasets/time-series/demo/popest/2010s-counties-total.html">County Population Totals</a> are estimated each year by the U.S. Census Bureau. We will use the 2019 estimates because the 2020 Census has not been released yet. To access the data, we download the <a href="https://www2.census.gov/programs-surveys/popest/tables/2010-2019/counties/totals/co-est2019-annres.xlsx">'co-est2019-annres.xlsx'</a> file, which contains the population estimates for each US county, from the U.S. Census Bureau's website. The top two rows of the downloaded .xlsx file are a heading. We removed the heading so the .xlsx file is compatible with pandas. The resulting .xlsx file is read to create a dataframe that contains the county population totals for every year since 2010.</p>
 
 </div>
@@ -14611,7 +14612,7 @@ p-value: 8.852761150461485e-08
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The census data has to be preprocessed because it is not compatible with the COVID-19 data in its current form. We drop the bottom columns because all of them are footnotes that are not useful to our analysis. Then, we use string functions to process 'County' column into 'county' and 'state' columns that match the format of the COVID-19 dataset.</p>
+<p>The census data must be preprocessed because it is not compatible with the COVID-19 data in its current form. We drop the bottom columns because all of them are footnotes that are not useful to our analysis. Then, we use string functions to process 'County' column into 'county' and 'state' columns that match the format of the COVID-19 dataset.</p>
 
 </div>
 </div>
@@ -15042,8 +15043,8 @@ p-value: 8.852761150461485e-08
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We graph the total cases across total population for each U.S. county in a scatterplot to visualize the relationship between case count and population. The distribution appears to be roughly linear, so we also fit linear regression line using scikit learn and overlay it on the plot.</p>
-<p>Scikit learn is also used to calculate the $p$-value of the distribution and $r^2$ score of the model. The null hypothesis of the significance test is that there is no statistically significant relationship between the total number of COVID-19 cases in a county and its population.</p>
+<p>We graph the total cases across total population for each U.S. county in a scatterplot to visualize the relationship between case count and population. The distribution appears to be roughly linear, so we also fit linear regression line using scikit-learn and overlay it on the plot.</p>
+<p>Scikit-learn is also used to calculate the $p$-value of the distribution and $r^2$ score of the model. The null hypothesis of the significance test is that there is no statistically significant relationship between the total number of COVID-19 cases in a county and its population.</p>
 
 </div>
 </div>
@@ -15123,7 +15124,7 @@ p-value: 0.0
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The linear regression model predicts that for every additional person in a county, 0.0146 are infected by the coronavirus.</p>
 <p>The $p$-value is 0.0, which, as expected, is less than the accepted threshold of 0.05. Therefore, we reject the null hypothesis: there is a highly statistically significant relationship between the total number of COVID-19 cases in a county and its population.</p>
-<p>The $r^2$ score is a high 0.858. While this regression model has a much better goodness of fit than the state model, most counties in the U.S. are not similar to Prince George and College Park. Therefore, the dataset could be trimmed to provide more focused results and perhaps an even higher $r^2$ score.</p>
+<p>The $r^2$ score is a high 0.859, indicating that the model is a good fit for the data. While this regression model has a much higher goodness of fit than the state model, most counties in the U.S. are not similar to Prince George County and College Park. Therefore, the dataset could be trimmed to provide more focused results and perhaps an even higher $r^2$ score.</p>
 
 </div>
 </div>
@@ -15476,66 +15477,22 @@ p-value: 1.0421718301217267e-11
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Insight-and-Policy-Decision-for-the-University-of-Maryland">Insight and Policy Decision for the University of Maryland<a class="anchor-link" href="#Insight-and-Policy-Decision-for-the-University-of-Maryland">&#182;</a></h2><p><a href="https://irpa.umd.edu/CampusCounts/Enrollments/stuprofile_allug.pdf">https://irpa.umd.edu/CampusCounts/Enrollments/stuprofile_allug.pdf</a></p>
-<p>Students living in residence halls are more likely to live outside of Prince George County. In Fall 2019, 11,902 UMD students were housed in residence halls.</p>
+<h2 id="Insight-for-the-University-of-Maryland">Insight for the University of Maryland<a class="anchor-link" href="#Insight-for-the-University-of-Maryland">&#182;</a></h2><p>What does this information mean for the University of Maryland? As illustrated by the Total Cases vs. Time line chart, coronavirus case counts in the United States are climbing more rapidly than ever. This steep trend is projected to continue past the beginning of the fall semester on August 31. The <a href='https://research.umd.edu/about/facts-figures'>official facts and figures</a> published by the Division of Research state that 41,000 students are enrolled at College Park.</p>
+<p>According to this report by the <a href='https://www.usnews.com/best-colleges/university-of-maryland-2103/student-life#:~:text=University%20of%20Maryland%2D%2DCollege%20Park%20has%20a%20total%20undergraduate,of%20students%20live%20off%20campus.'>U.S. News</a>, 41% of University of Maryland, College Park students live in college-owned, -operated or -affiliated housing during a typical school year. We could not find any official figures for the proportion of students living off campus that move to College Park only for the school year, so we base our predictions only on the students that move into university housing.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coef</span> <span class="o">*</span> <span class="mi">11902</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[18]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>204.0046453526151</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>According to the linear regression model,  if residence halls were opened and filled to normal capacity, there would be a predicted 153 new cases in Prince George County.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Export-Notebook-as-index.html">Export Notebook as index.html<a class="anchor-link" href="#Export-Notebook-as-index.html">&#182;</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span> jupyter nbconvert index.ipynb
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Estimate number of students that move into university housing. </span>
+<span class="n">students</span> <span class="o">=</span> <span class="mi">41000</span> <span class="o">*</span> <span class="mf">0.41</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Students in University Housing: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">students</span><span class="p">))</span>
+<span class="c1"># Calculate number of cases predicted by the model. </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Predicted Cases: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">coef</span> <span class="o">*</span> <span class="n">students</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -15551,9 +15508,9 @@ p-value: 1.0421718301217267e-11
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[NbConvertApp] Converting notebook index.ipynb to html
-[NbConvertApp] Writing 485237 bytes to index.html
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Students in University Housing: 16810.0
+Predicted Cases: 288.12956548289867
 </pre>
 </div>
 </div>
@@ -15562,12 +15519,148 @@ p-value: 1.0421718301217267e-11
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If university housing was filled to normal capacity, the population of College Park would increase by approximately 16,810 people. The linear regression model, fitted to the total cases across population of counties in Maryland, estimates that 288 coronavirus cases would be reported.</p>
+<p>This figure is almost definitely an underestimate: the coefficient and, as a result, the predicted cases will most likely continue to grow as the virus continues to spread. University housing can also be very different than regular residences. The <a href='http://reslife.umd.edu/global/documents/marketreport/UMDStudentHousingMarketAnalysis2017Report.pdf'>UMD Student Housing Market Analysis</a> writes that 57% of units are doubles and 12% are triples. Dormitory rooms with two or even three students would spread the virus quickly, especially since the university has an unfortunate history with <a href='https://www.washingtonpost.com/news/national/wp/2019/05/16/feature/university-of-maryland-mold-adenovirus/'>viruses spreading in residence halls</a>.</p>
+<p>Furthermore, this prediction only accounts for changes in housing. In-person lectures and discussion put potentially hundreds of students in close proximity with each other for prolonged periods of time. Of course, the very nature of college students -- and their social lives -- is also very vulnerable to pandemics. Student life and bars will pose major health threats.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Possible faculty member deaths. </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Deaths: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">death_rate</span> <span class="o">*</span> <span class="n">coef</span> <span class="o">*</span> <span class="mi">14000</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Predicted Deaths: 8.78279710661456
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>While college-aged students are unlikely to die from complications caused by the coronavirus, faculty and staff members tend to be older and more susceptible to the virus. The <a href='https://research.umd.edu/about/facts-figures'>official facts and figures</a> state that 14,000 faculty and staff members are employed at College Park. The figure above uses the national death rate to predict the number of faculty and staff that could succumb to COVID-19.</p>
+<p>It is in no way an accurate estimate, but the figure represents how an ordinary semester in the current environment would be dangerous.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Policy-Decision">Policy Decision<a class="anchor-link" href="#Policy-Decision">&#182;</a></h2><p>Fortunately, the University of Maryland is already taking steps. The decision to close the campus after spring break in 2020 prevented many students from contracting the virus. UMD's <a href='https://umd.edu/4Maryland'>Fall 2020 Reopening plan</a> focuses on minimizing in-person social interactions and providing a safe and healthy on-campus learning environment. Most classes are online only, personal protective equipment is required, and students have the opportunity to stay at home for the semester. Dining halls have strategies to avoid large gatherings of people and the contamination of food. Research, clubs, and fraternities must adhere to the community safety guidelines. The Health, Counseling, and Career centers will remain open for appointments.</p>
+<p>The residence halls section of the <a href='https://umd.edu/4Maryland/student-life-plan'>Student Life Plan</a> is most relevant to our insight discussion. Residence halls have been converted to reduce occupancy and increase distance. The deadline to cancel agreements has also been extended, allowing more students to choose not to return to campus without wasting money on an unoccupied room. Students will have the opportunity to apply for housing for the spring semester if the campus reopens. No statistics have been published, but the changes are critical in preventing COVID-19 from surging in university residences.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot cases on a line chart. </span>
+<span class="n">cases</span> <span class="o">=</span> <span class="n">covid</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[[</span><span class="s1">&#39;cases&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cases</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">cases</span><span class="p">[</span><span class="s1">&#39;cases&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cases&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Total Cases vs. Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="n">covid</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">covid</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+<span class="c1"># Overlay line to show the effects of reopening too early.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;2020-06-17&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>However, there are weaknesses in the plan. Eppley Recreation Center and the Stamp Student Union will both be open and will even provide in-person activities. Although both facilities are normally vital to student life and physical well-being, keeping gyms open and encouraging in-person social gatherings during a pandemic is considered by some to be irresponsible. Closing these facilities and cancelling in-person events is the safer option. The continued operation of businesses outside of the University's control, such as bars and fraternities, could also contribute to the pandemic, but these are issues better handled by local governments.</p>
+<p>Decisions to reopen the campus must be made very carefully. The red dotted line in the Total Cases vs. Time plot depicts a previously made observation that new virus cases per day more than doubled when governments attempted to lift restrictions on their communities. Reopening too early could be disastrous, especially since out of state and international students make up <a href='https://research.umd.edu/about/facts-figures'>24.3% of the undergraduate population</a>. New cases must be at a minimum not only in Maryland, but also the entire United States and even the world before it is safe to reopen.</p>
+<p>The University of Maryland has adapted to these insights. According to the <a href='https://president.umd.edu/articles/fall-2020-update#:~:text=We%20will%20begin%20the%20fall,the%20pandemic%20in%20late%20fall.'>original plan</a> sent out by email on June 15, the University of Maryland initially planned to begin the fall semester as scheduled and move to online instruction after Thanksgiving break if the pandemic had a resurgence in the fall. Since then, the University has made the decision to conduct the entire fall semester remotely.</p>
+<p>Whether to resume in-person instruction in January has yet to be decided. We would advise the University of Maryland to continue remote instruction throughout the spring semester based on the results of our analysis. The current upward trend in cases indicates that the pandemic is unlikely to be sufficiently subdued in time and reopening the campus would be hazardous to students, faculty, and staff.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><ol>
+<li>Abelson, Jenn, et al. “Adenovirus at the University of Maryland.” The Washington Post, WP Company, 16 May 2019, www.washingtonpost.com/news/national/wp/2019/05/16/feature/university-of-maryland-mold-adenovirus/.</li>
+<li>Bureau, US Census. “County Population Totals: 2010-2019.” The United States Census Bureau, The United States Census Bureau, 22 June 2020, www.census.gov/data/datasets/time-series/demo/popest/2010s-counties-total.html.</li>
+<li>“Coronavirus (Covid-19) Data in the United States.” New York Times Github, New York Times, 21 July 2020, www.github.com/nytimes/covid-19-data.</li>
+<li>Drl. “Student Housing Market Analysis.” Department of Resident Life, University of Maryland, June 2017, www.reslife.umd.edu/marketstudy/.</li>
+<li>Facts and Figures, Division of Research, Aug. 2019, www.research.umd.edu/about/facts-figures.</li>
+<li>“Fall 2020 Reopening Plan.” University of Maryland, University of Maryland, 16 July 2020, www.umd.edu/4Maryland.</li>
+<li>“Here's What Student Life Is Like At University of Maryland--College Park.” U.S. News &amp; World Report, U.S. News &amp; World Report, www.usnews.com/best-colleges/university-of-maryland-2103/student-life.</li>
+<li>Loh, Wallace D. “Fall 2020 Update.” Office of the President, University of Maryland, 15 June 2020, www.president.umd.edu/articles/fall-2020-update.</li>
+<li>“State Population by Rank.” Infoplease, Infoplease, June 2019, www.infoplease.com/us/states/state-population-by-rank.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%capture</span> 
+<span class="c1"># Export notebook as index.html</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;index.html&quot;</span><span class="p">)</span>
+<span class="err">!</span> <span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="n">index</span><span class="o">.</span><span class="n">ipynb</span>
 </pre></div>
 
     </div>
